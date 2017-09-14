@@ -23,8 +23,8 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">How many stacks in <input id="number" type="number"> items?</h1>
-      <h2 id="result" class="project-tagline">Result goes here</h2>
+      <h1 class="project-name">How many stacks in <input id="number" type="number" style="width: 150px;background-color: rgba(1,1,1,0);outline: none;" value="123"> items?</h1>
+      <h2 id="result" class="project-tagline">1 stack and 59 items</h2>
       
         <a href="https://github.com/mouro001/mouro001.github.com/" class="btn">View on GitHub</a>
       
@@ -40,6 +40,21 @@
       </footer>
     </section>
 
-    
+    <script>
+    document.getElementById("number").addEventListener('input', update);
+    function count(number){
+      var result = new Object();
+      result.stacks = Math.floor(number/64);
+      result.remaining = number % 64;
+      return result; 
+    }
+    function update(){
+      var result = count(this.value);
+      var expanded = result.stacks > 0 ? (result.stacks + " stack"+(result.stacks > 1 ? "s": "")) : "";
+      expanded += result.stacks > 0 & result.remaining > 0 ? " and " : "";
+      expanded += result.remaining > 0 ? result.remaining + " item" + (result.remaining > 1 ? "s": "") : "";
+      document.getElementById("result").textContent = expanded;
+    }
+  </script>
   </body>
 </html>
